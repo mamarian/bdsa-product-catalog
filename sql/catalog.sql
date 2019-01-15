@@ -61,3 +61,12 @@ CREATE TABLE IF NOT EXISTS `products` (
 
 
 
+CREATE TABLE IF NOT EXISTS `messages` (
+`id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `createdBy` varchar(30) DEFAULT NULL,
+  `text` varchar(100) DEFAULT NULL,
+    `createdAt` timestamp,
+  `updatedAt` timestamp,
+  PRIMARY KEY (`id`),
+  KEY `id_mesaj` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

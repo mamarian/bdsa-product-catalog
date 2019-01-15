@@ -4,41 +4,80 @@
     border: none;
 }
 body {
-    font-family: 'robotoregular', Arial, Verdana, sans-serif;
+  background: #fafafa;
+	color: #9d2ea5;
+		font-family:"Comic Sans MS";
 }
-h1,h2,h3,h4,h5,h6,strong,b {
-    font-family: 'robotobold';
-    font-weight: normal;
+h1 {
+  font-weight: 700;
+  font-size: 50px;
+  color: #9694BB;
+  line-height: 55px;
 }
-em,i {
-    font-family: 'robotoitalic';
-    font-style: normal;
+
+h1 span {
+  color: #9694BB;
 }
+
+h2 {
+  font-weight: 400;
+  color:#8785A8;
+  margin-top: -15px;
+  font-size: 18px;
+}
+
+
 #container {
-    margin: 0 auto;
-    width: 100%;
-    background: #fff;
+  width: 800px;
+  height: 600px;
+  background: white;
+  margin: 0 auto;
+  border-radius: 25px;
+  box-shadow: -2px 7px 44px -1px rgba(94, 78, 128, 0.66);
 }
+
+div.sidebar {
+  width: 20%;
+  height: 10%;
+  border-radius: 15px 0 0 25px;
+  padding: 5px;
+}
+
+nav {
+  float: right;
+  padding: 20px;
+}
+
+nav li{
+  color: #89D0CE;
+  text-decoration: none;
+  padding: 0 20px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+
+
 header {
-    background: #ccc;
+    background: #ECEBE3;
+}
+
+header h3 {
+    background: #ECEBE3;
+    color:#ECEBE3;
 }
 header h1 {
     margin: 0;
 }
-#logo {
-    padding: 20px;
-}
+
 #navigation {
     float: left;
     width: 100%;
-    background: #333;
+    background: #7651b6;
 }
-#navigation ul {
-    margin: 0;
-    padding: 0;
-}
+
 #navigation ul li {
-    list-style-type: none;
+    list-style-type: circle;
     display: inline;
 }
 #navigation li a {
@@ -50,7 +89,7 @@ header h1 {
     border-right: 1px solid #fff;
 }
 #navigation li a:hover {
-    background: #c00;
+    background: #89D0CE;
 }
 main {
     float: left;
@@ -59,7 +98,7 @@ main {
 main > section {
     float: left;
     width: 100%;
-    background: #f2f2f2;
+    background: #ECEBE3
 }
 main > section > .sidebar {
     display: inline;
@@ -85,8 +124,7 @@ main > section > .sidebar.left ul li {
     width: 60%;
     padding: 20px 10px;
     box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    background: #fff;
+    background-image: url("https://i.pinimg.com/564x/4f/e9/9c/4fe99cddd03e2b2769febc5954277438.jpg");
     border-width: 0 1px 0 1px;
     border-color: #ccc;
     border-style: solid;
@@ -100,10 +138,7 @@ main > section > .sidebar.right {
 main > section > .sidebar.right h3 {
     margin: 0;
 }
-footer {
-    clear: both;
-    background: #ccc;
-    text-align: left;
-    padding: 20px;
-    height: 1%;
-}
+
+
+
+

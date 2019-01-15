@@ -1,3 +1,43 @@
+/*var app = angular.module('bdsachatapp', []);
+
+//controllers
+app.controller('mainCtrl', function($scope) {
+  $scope.posts = [];
+  $scope.newPost = { createdBy: '', text: '', createdAt: '' };
+  
+   $scope.post = function() {
+    $scope.newPost.createdAt = Date.now();
+    $scope.posts.push($scope.newPost);
+    $scope.newPost = { createdBy: '', text: '', createdAt: ''};    
+  };
+ 
+});
+*/
+//create messages
+function sendMessages() {
+    var formData = $('#create_message').serializeObject();
+    // var formData = formdd();
+        console.log(formData);
+    createMessage(formData);
+}
+function createMessage(formData) {
+    $.ajax({
+        url: '/messages/',
+        type: 'POST',
+        accepts: {
+            json: 'application/json'
+        },
+        data: formData,
+        success: function(data) {
+            
+            // var row = '<tr id="row_id_'+ data.id +'">'
+            // 			+ displayColumns(data)
+        				// + '</tr>';
+            // $('#articles').append(row);
+        } 
+    });
+}
+
 /*global $*/
 
 // READ recods on page load
@@ -7,7 +47,7 @@ $(document).ready(function () {
 
 // READ records
 function readRecords() {
-    $.get("/products/", {}, function (data, status) {
+    $.get("/messages/", {}, function (data, status) {
         data.forEach(function(value) {
             var row = '<tr id="row_id_'+ value.id +'">'
             			+ displayColumns(value)
@@ -19,11 +59,9 @@ function readRecords() {
 
 function displayColumns(value) {
     return 	'<td>'+value.id+'</td>'
-            + '<td class="category_id">'+value.category.name+'</td>'
-            + '<td class="name">'+value.name+'</td>'
-			+ '<td class="description">'+value.description+'</td>'
-						+ '<td class="price">'+value.price+'</td>'
-									+ '<td class="image">'+value.image+'</td>'
+            + '<td class="name">'+value.createdBy+'</td>'
+            + '<td class="name">'+value.createdAt+'</td>'
+			+ '<td class="text">'+value.text+'</td>'
 			+ '<td align="center">'
 			+	'<button onclick="viewRecord('+ value.id +')" class="btn btn-edit">Update</button>'
 			+ '</td>'
@@ -34,27 +72,22 @@ function displayColumns(value) {
 
 function addRecord() {
     $('#id').val('');
-    $('#category_id').val('');
-    $('#name').val('');
-    $('#description').val('');
-    $('#price').val('');
-        $('#image').val('');
-    
-    $('#myModalLabel').html('Add New Product');
+    $('#createdBy').val('');
+    $('#createdAt').val('');
+    $('#text').val('');
+  //  $('#add_new_record_modal').modal('show');
 }
 
 function viewRecord(id) {
-    var url = "/products/" + id;
+    var url = "/messages/" + id;
     
     $.get(url, {}, function (data, status) {
         //bind the values to the form fields
-        $('#category_id').val(data.category_id);
-        $('#name').val(data.name);
-        $('#description').val(data.description);
+        $('#createdBy').val(data.createdBy);
+          $('#createdAt').val(data.createdAt);
+        $('#text').val(data.text);
+
         $('#id').val(id);
-        $('#price').val(data.price);
-                $('#image').val(data.image);
-        $('#myModalLabel').html('Edit Product');
         
         $('#add_new_record_modal').modal('show');
     });
@@ -72,9 +105,10 @@ function saveRecord() {
     }
 }
 
+
 function createRecord(formData) {
     $.ajax({
-        url: '/products/',
+        url: '/messages/',
         type: 'POST',
         accepts: {
             json: 'application/json'
@@ -93,18 +127,16 @@ function createRecord(formData) {
 
 function updateRecord(formData) {
     $.ajax({
-        url: '/products/'+formData.id,
+        url: '/messages/'+formData.id,
         type: 'PUT',
         accepts: {
             json: 'application/json'
         },
         data: formData,
         success: function(data) {
-            $('#row_id_'+formData.id+'>td.category_id').html(formData.category_id);
-            $('#row_id_'+formData.id+'>td.name').html(formData.name);
-            $('#row_id_'+formData.id+'>td.description').html(formData.description);
-            $('#row_id_'+formData.id+'>td.price').html(formData.price);
-                        $('#row_id_'+formData.id+'>td.image').html(formData.image);
+            $('#row_id_'+formData.id+'>td.createdBy').html(formData.createdBy);
+             $('#row_id_'+formData.id+'>td.createdAt').html(formData.createdAt);
+            $('#row_id_'+formData.id+'>td.text').html(formData.text);
             $('#add_new_record_modal').modal('hide');
         } 
     });
@@ -112,7 +144,7 @@ function updateRecord(formData) {
 
 function deleteRecord(id) {
     $.ajax({
-        url: '/products/'+id,
+        url: '/mesages/'+id,
         type: 'DELETE',
         success: function(data) {
             $('#row_id_'+id).remove();

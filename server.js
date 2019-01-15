@@ -33,6 +33,11 @@ var Reviews = sequelize.define('reviews', {
     score: Sequelize.INTEGER
 })
 
+var Messages = sequelize.define('messages', {
+    createdBy: Sequelize.STRING,
+    text: Sequelize.STRING
+})
+
 Products.belongsTo(Categories, {foreignKey: 'category_id', targetKey: 'id'})
 Products.hasMany(Reviews, {foreignKey: 'product_id'});
 
@@ -228,4 +233,54 @@ app.delete('/reviews/:id', function(request, response) {
     
 })
 
+//mesaje
+
+app.get('/messages', function(request, response) {
+    Messages.findAll(
+        {
+            
+        }
+        
+        ).then(
+            function(messages) {
+                response.status(200).send(messages)
+            }
+        )
+})
+
+app.get('/messages/:id', function(request, response) {
+    Messages.findById(request.params.id, {
+            include: [{
+                model: Messages,
+                where: { id: Sequelize.col('messages.id') }
+            }]
+        }).then(
+            function(message) {
+                response.status(200).send(message)
+            }
+        )
+})
+
+// get a list of messages
+
+
+
+//create messages
+app.post('/messages', function(request, response) {
+    Messages.create(request.body).then(function(message) {
+        response.status(201).send(message)
+    })
+})
+
+async function getMessages(request, response) {
+    try {
+        let messages = await Messages.findAll();
+        response.status(200).json(messages)
+    } catch(err) {
+        response.status(500).send('something bad happened')
+    }
+}
+
+
+app.get('/messages', getMessages)
 app.listen(8080)

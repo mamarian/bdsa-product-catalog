@@ -13,6 +13,8 @@ function showCategories() {
     });
 }
 
+
+
 //todo: implement showProducts method
 function showProducts(categoryId) {
     if(categoryId) {
@@ -27,11 +29,12 @@ function showProducts(categoryId) {
                 html = html + '<div class="product">'
                   +  '<h2>'+product.name+'</h2>'
                   +  '<p>'+product.description+'</p>'
-                  +  '<p>Pret: '+product.pret+'</p>'
+                  +  '<p>Pret: '+product.price+'</p>'
+                  +  '<p>Review: '+product.image+'</p>'
                   +  '<p>Categorie: '+product.category.name+'</p>'
                 + '</div>';
                 
-                html = html + '<h3>Product reviews</h3>'
+                html = html + '<h3>_______________________________________</h3>'
                 
                 if(product.reviews) {
                     product.reviews.forEach(
